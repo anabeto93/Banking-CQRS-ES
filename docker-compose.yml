@@ -100,7 +100,7 @@ services:
   nginx:
     image: nginx:1.17-alpine
     container_name: banking-nginx
-    restart: unless-stopped
+    #restart: unless-stopped
     ports:
       - "80:80"
       - "443:443"
@@ -109,8 +109,16 @@ services:
       - ./customers:/var/sites/customers
       - ./statements:/var/sites/statements
       - ./docker/nginx/configs:/etc/nginx/conf.d
+      - ./docker/nginx/certs/accounts:/etc/nginx/ssl/accounts
+      - ./docker/nginx/certs/customers:/etc/nginx/ssl/customers
+      - ./docker/nginx/certs/statements:/etc/nginx/ssl/statements
+    depends_on: 
+      - account
+      - customer
+      - statement
     networks:
       - banking-backend
+      - default
 
 volumes:
   banking-customers-data:
