@@ -6,7 +6,7 @@ services:
       args:
         user: ${USER}
       context: ./accounts
-      dockerfile: ./accounts/Dockerfile
+      dockerfile: Dockerfile
     image: banking-account
     container_name: banking-account
     restart: unless-stopped
@@ -19,7 +19,7 @@ services:
       args:
         user: ${USER}
       context: ./customers
-      dockerfile: ./customers/Dockerfile
+      dockerfile: Dockerfile
     image: banking-customer
     container_name: banking-customer
     restart: unless-stopped
@@ -36,7 +36,7 @@ services:
       args:
         user: ${USER}
       context: ./statements
-      dockerfile: ./statements/Dockerfile
+      dockerfile: Dockerfile
     image: banking-statement
     container_name: banking-statement
     restart: unless-stopped
