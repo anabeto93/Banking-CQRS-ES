@@ -10,7 +10,7 @@ Edit your `etc/hosts` to point to the microservices. If you are on windows, this
 sudo vim /etc/hosts
 ```
 
-Add the entries below:
+Add the entries below:  
 `192.168.99.100 accounts.banking.test www.accounts.banking.test`  
 `192.168.99.100 accounts.banking.test www.accounts.banking.test`  
 `192.168.99.100 accounts.banking.test www.accounts.banking.test`  
