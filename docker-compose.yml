@@ -13,6 +13,11 @@ services:
     tty: true
     ports:
       - 8080:8080
+    depends_on: 
+      - discovery
+    environment: 
+      - JAVA_OPTS=
+        -DEUREKA_SERVER=http://discovery:8761/eureka
 
   customer:
     build:
@@ -30,6 +35,8 @@ services:
       SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/${DB_DATABASE}?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
       SPRING_DATASOURCE_USERNAME: ${DB_USERNAME}
       SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
+    depends_on: 
+      - discovery
 
   statement:
     build:
@@ -43,6 +50,11 @@ services:
     tty: true
     ports:
       - 8082:8080
+    depends_on: 
+      - discovery
+    environment: 
+      - JAVA_OPTS=
+        -DEUREKA_SERVER=http://discovery:8761/eureka
 
   db:
     image: mysql:5.7
@@ -100,7 +112,7 @@ services:
   nginx:
     image: nginx:1.17-alpine
     container_name: banking-nginx
-    #restart: unless-stopped
+    restart: unless-stopped
     ports:
       - "80:80"
       - "443:443"
@@ -119,6 +131,11 @@ services:
     networks:
       - banking-backend
       - default
+
+  discovery:
+    image: discovery:0.0.1-SNAPSHOT
+    ports:
+      - 8761:8761
 
 volumes:
   banking-customers-data:

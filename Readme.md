@@ -23,6 +23,11 @@ Copy the `.env.example` to `.env` so that the environment variables can be easil
 cp .env.example .env
 ```
 
+Change directory to the discovery server and build the container to generate the discovery snapshot first
+```bash
+cd discovery && docker-compose build && cd ..
+```
+
 Build all the containers before running them.
 
 ```bash
