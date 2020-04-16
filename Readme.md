@@ -11,9 +11,9 @@ sudo vim /etc/hosts
 ```
 
 Add the entries below:
-`192.168.99.100 accounts.banking.test www.accounts.banking.test`
-`192.168.99.100 accounts.banking.test www.accounts.banking.test`
-`192.168.99.100 accounts.banking.test www.accounts.banking.test`
+`192.168.99.100 accounts.banking.test www.accounts.banking.test`  
+`192.168.99.100 accounts.banking.test www.accounts.banking.test`  
+`192.168.99.100 accounts.banking.test www.accounts.banking.test`  
 
 #### Kindly note that the `192.168.99.100` is the IP address of my docker-machine, for those using Windows and Mac with docker-toolbox
 
