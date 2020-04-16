@@ -135,6 +135,17 @@ services:
     image: discovery:0.0.1-SNAPSHOT
     ports:
       - 8761:8761
+    networks:
+      - banking-backend
+
+  axxon:
+    image: axoniq/axonserver
+    ports:
+      - 8024:8024
+      - 8124:8124
+    networks:
+      - banking-backend
+
 
 volumes:
   banking-customers-data:

@@ -1,10 +1,14 @@
 package com.example.accounts.docs;
 
+import java.util.Collections;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import io.swagger.models.Contact;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
@@ -20,5 +24,17 @@ public class SwaggerConfig {
             .apis(RequestHandlerSelectors.any())
             .paths(PathSelectors.any())
             .build();
+    }
+
+    private ApiInfo getApiInfo() {
+        return new ApiInfo(
+                "CQRS & ES Sample App based on Spring Boot and Axon",
+                "App to demonstrate CQRS & ES based on Spring Boot and Axon",
+                "0.0.1-SNAPSHOT",
+                "Terms of Service",
+                new Contact("Richard Anabeto Opoku", "https://richardopoku.com", "anabeto93@gmail.com"),
+                "",
+                "",
+                Collections.emptyList());
     }
 }
