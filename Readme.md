@@ -22,3 +22,15 @@ Copy the `.env.example` to `.env` so that the environment variables can be easil
 ```bash
 cp .env.example .env
 ```
+
+Build all the containers before running them.
+
+```bash
+docker-compose build
+```
+
+#### You need patience and fast internet to get through this step. Takes quite a bit to build all springboot services.
+
+```bash
+docker-compose up -d
+```
