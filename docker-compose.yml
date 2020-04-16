@@ -1,0 +1,11 @@
+version: '3.7'
+
+services:
+
+volumes:
+  banking-customers-data:
+  banking-statements-data:
+  banking-accounts-data:
+
+networks:
+  banking-backend:
