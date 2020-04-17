@@ -4,7 +4,7 @@ This is a simple demo project to show how to implement CQRS and ES in a banking 
 
 ## Setup and Installation
 
-Edit your `etc/hosts` to point to the microservices. If you are on windows, this can be found at C:\Windows\System32\drivers\etc\hosts
+Edit your `etc/hosts` to point to the microservices. If you are on windows, this can be found at `C:\Windows\System32\drivers\etc\hosts`
 
 ```bash
 sudo vim /etc/hosts
