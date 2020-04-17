@@ -14,6 +14,9 @@ Add the entries below:
 `192.168.99.100 accounts.banking.test www.accounts.banking.test`  
 `192.168.99.100 accounts.banking.test www.accounts.banking.test`  
 `192.168.99.100 accounts.banking.test www.accounts.banking.test`  
+`192.168.99.100 rabbit.banking.test www.rabbit.banking.test`  
+`192.168.99.100 axxon.banking.test www.axxon.banking.test`  
+`192.168.99.100 discovery.banking.test www.discovery.banking.test`  
 
 #### Kindly note that the `192.168.99.100` is the IP address of my docker-machine, for those using Windows and Mac with docker-toolbox
 
