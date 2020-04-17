@@ -123,6 +123,7 @@ services:
       - ./docker/nginx/certs/accounts:/etc/nginx/ssl/accounts
       - ./docker/nginx/certs/customers:/etc/nginx/ssl/customers
       - ./docker/nginx/certs/statements:/etc/nginx/ssl/statements
+      - ./docker/nginx/certs/all:/etc/nginx/ssl/all
     depends_on: 
       - account
       - customer
@@ -149,9 +150,13 @@ services:
 
 volumes:
   banking-customers-data:
+    driver: local
   banking-statements-data:
+    driver: local
   banking-accounts-data:
+    driver: local
   banking-broker-data:
+    driver: local
 
 networks:
   banking-backend:
