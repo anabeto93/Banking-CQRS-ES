@@ -90,7 +90,7 @@ services:
       - banking-backend
 
   rabbitmq:
-    image: rabbitmq:3-management-alpine
+    image: rabbitmq:3-management
     container_name: banking-rabbitmq
     restart: unless-stopped
     tty: true
