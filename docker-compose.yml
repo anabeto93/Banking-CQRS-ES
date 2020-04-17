@@ -115,6 +115,9 @@ services:
     ports:
       - "80:80"
       - "443:443"
+      # - "8025:8024"
+      # - "15673:15672"
+      # - "8762:8761"
     volumes:
       - ./accounts:/var/sites/accounts
       - ./customers:/var/sites/customers
