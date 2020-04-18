@@ -14,37 +14,44 @@ services:
     environment: 
       - JAVA_OPTS=
         -DEUREKA_SERVER=http://discovery:8761/eureka
+        -Deureka.instance.preferIpAddress=true
+    networks:
+      - banking-backend
 
-  # customer:
-  #   image: customers:0.0.1-SNAPSHOT
-  #   container_name: banking-customer
-  #   restart: unless-stopped
-  #   tty: true
-  #   ports:
-  #     - 8081:8081
-  #   environment: # Pass environment variables to the service
-  #     - JAVA_OPTS=
-  #       -DSPRING_DATASOURCE_URL=jdbc:mysql://db:3306/${DB_DATABASE}?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
-  #       -DSPRING_DATASOURCE_USERNAME=${DB_USERNAME}
-  #       -DSPRING_DATASOURCE_PASSWORD=${DB_PASSWORD}
-  #       -DEUREKA_SERVER=http://discovery:8761/eureka
-  #   depends_on: 
-  #     - discovery
-  #     - config
+  customer:
+    image: customers:0.0.1-SNAPSHOT
+    container_name: banking-customer
+    restart: unless-stopped
+    tty: true
+    ports:
+      - 8081:8081
+    environment: # Pass environment variables to the service
+      - JAVA_OPTS=
+        -DSPRING_DATASOURCE_URL=jdbc:mysql://db:3306/${DB_DATABASE}?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
+        -DSPRING_DATASOURCE_USERNAME=${DB_USERNAME}
+        -DSPRING_DATASOURCE_PASSWORD=${DB_PASSWORD}
+        -DEUREKA_SERVER=http://discovery:8761/eureka
+    depends_on: 
+      - discovery
+      - config
+    networks:
+      - banking-backend
 
-  # statement:
-  #   image: statements:0.0.1-SNAPSHOT
-  #   container_name: banking-statement
-  #   restart: unless-stopped
-  #   tty: true
-  #   ports:
-  #     - 8082:8082
-  #   depends_on: 
-  #     - discovery
-  #     - config
-  #   environment: 
-  #     - JAVA_OPTS=
-  #       -DEUREKA_SERVER=http://discovery:8761/eureka
+  statement:
+    image: statements:0.0.1-SNAPSHOT
+    container_name: banking-statement
+    restart: unless-stopped
+    tty: true
+    ports:
+      - 8082:8082
+    depends_on: 
+      - discovery
+      - config
+    environment: 
+      - JAVA_OPTS=
+        -DEUREKA_SERVER=http://discovery:8761/eureka
+    networks:
+      - banking-backend
 
   db:
     image: mysql:5.7
@@ -121,7 +128,7 @@ services:
       # - statement
     networks:
       - banking-backend
-      - default
+      # - default
 
   discovery:
     image: discovery:0.0.1-SNAPSHOT
