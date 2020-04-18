@@ -95,9 +95,9 @@ services:
     restart: unless-stopped
     tty: true
     volumes:
-      - ./.data/rabbitmq/etc/:/etc/rabbitmq/
+      #- ./.data/rabbitmq/etc/:/etc/rabbitmq/
       - banking-broker-data:/var/lib/rabbitmq/
-      - ./.data/rabbitmq/logs/:/var/log/rabbitmq/
+      #- ./.data/rabbitmq/logs/:/var/log/rabbitmq/
     environment:
       RABBITMQ_ERLANG_COOKIE: ${RABBITMQ_ERLANG_COOKIE}
       RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER}
@@ -108,32 +108,32 @@ services:
     networks:
       - banking-backend
 
-  nginx:
-    image: nginx:1.17-alpine
-    container_name: banking-nginx
-    restart: unless-stopped
-    ports:
-      - "80:80"
-      - "443:443"
-      # - "8025:8024"
-      # - "15673:15672"
-      # - "8762:8761"
-    volumes:
-      - ./accounts:/var/sites/accounts
-      - ./customers:/var/sites/customers
-      - ./statements:/var/sites/statements
-      - ./docker/nginx/configs:/etc/nginx/conf.d
-      - ./docker/nginx/certs/accounts:/etc/nginx/ssl/accounts
-      - ./docker/nginx/certs/customers:/etc/nginx/ssl/customers
-      - ./docker/nginx/certs/statements:/etc/nginx/ssl/statements
-      - ./docker/nginx/certs/all:/etc/nginx/ssl/all
-    depends_on: 
-      - account
-      - customer
-      - statement
-    networks:
-      - banking-backend
-      - default
+  # nginx:
+  #   image: nginx:1.17-alpine
+  #   container_name: banking-nginx
+  #   restart: unless-stopped
+  #   ports:
+  #     - "80:80"
+  #     - "443:443"
+  #     # - "8025:8024"
+  #     # - "15673:15672"
+  #     # - "8762:8761"
+  #   volumes:
+  #     - ./accounts:/var/sites/accounts
+  #     - ./customers:/var/sites/customers
+  #     - ./statements:/var/sites/statements
+  #     - ./docker/nginx/configs:/etc/nginx/conf.d
+  #     - ./docker/nginx/certs/accounts:/etc/nginx/ssl/accounts
+  #     - ./docker/nginx/certs/customers:/etc/nginx/ssl/customers
+  #     - ./docker/nginx/certs/statements:/etc/nginx/ssl/statements
+  #     - ./docker/nginx/certs/all:/etc/nginx/ssl/all
+  #   depends_on: 
+  #     - account
+  #     - customer
+  #     - statement
+  #   networks:
+  #     - banking-backend
+  #     - default
 
   discovery:
     image: discovery:0.0.1-SNAPSHOT
@@ -149,6 +149,21 @@ services:
       - 8124:8124
     networks:
       - banking-backend
+
+  config:
+    build:
+      context: ./config
+      dockerfile: Dockerfile
+    volumes:
+      - ./.data/config-data:/var/config-data
+    environment:
+      - JAVA_OPTS=
+         -DEUREKA_SERVER=http://discovery:8761/eureka
+         -Dspring.cloud.config.server.native.searchLocations=/var/config-data
+    depends_on:
+      - discovery
+    ports:
+      - 8888:8888
 
 
 volumes:
