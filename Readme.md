@@ -26,6 +26,21 @@ Copy the `.env.example` to `.env` so that the environment variables can be easil
 cp .env.example .env
 ```
 
+Build each project manually first  
+
+```bash
+cd accounts && mvn -T6 clean package && cd ..  
+cd config && mvn -T6 clean package && cd ..  
+cd customers && mvn -T6 clean package && cd ..  
+cd discovery && mvn -T6 clean package && cd ..  
+cd statements && mvn -T6 clean package && cd ..  
+```
+#### Or if you're lazy like me, you can run all as one command
+
+```bash
+cd accounts && mvn -T6 clean package && cd .. && cd config && mvn -T6 clean package && cd ..  && cd customers && mvn -T6 clean package && cd .. && cd discovery && mvn -T6 clean package && cd ..  && cd statements && mvn -T6 clean package && cd .. 
+```
+
 Change directory to the discovery server and build the container to generate the discovery snapshot first
 ```bash
 cd discovery && docker-compose build && cd ..
@@ -42,3 +57,5 @@ docker-compose build
 ```bash
 docker-compose up -d
 ```
+
+One sad notice is, when you start up these applications, you have to wait a minimum of 2 minutes before you can use anyone of them.
